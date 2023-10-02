@@ -61,21 +61,34 @@ def team(request, team : str):
     except:
         raise Http404()
 
-def team_players(requestm, team : str):
+def team_players(request, team : str):
     method_name : str = inspect.stack()[0][3] + "()"
     request_title : str = f"Players of club - {team}"
     response_body : str = "View that will show players that are playing in certain club. Same basic information about them."
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    players = "players"
+
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "footballstats/players.html", {
+        "players" : players
+    })
+
 
 def team_matches(request, team : str):
     method_name : str = inspect.stack()[0][3] + "()"
     request_title : str = f"Matches of club - {team}"
     response_body : str = "This site will list matches of specific club."
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    matches = "matches"
+
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "footballstats/matches.html", {
+        "matches" : matches
+    })
 
 
 def players(request):
@@ -83,30 +96,53 @@ def players(request):
     request_title : str = f"All players"
     response_body : str = "List of all players that was playing in Serie A league."
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    players = "players"
+
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "footballstats/players.html", {
+        "players" : players
+    })
 
 def player(request, player):
     method_name : str = inspect.stack()[0][3] + "()"
     request_title : str = f"Player"
     response_body : str = "Information about player"
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    player = "player"
 
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "footballstats/player.html", {
+        "player" : player
+    })
 
 def matches(request):
     method_name : str = inspect.stack()[0][3] + "()"
     request_title : str = f"All matches in current season"
     response_body : str = "List of all matches of current season."
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    matches = "matches"
+
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "footballstats/matches.html", {
+        "matches" : matches
+    })
 
 def matches_of_season(request, season : str):
-    method_name : str = inspect.stack()[0][3] + "()"
-    request_title : str = f"All matches in specific season"
-    response_body : str = f"List of all matches of Serie A league in season {season}."
+    # method_name : str = inspect.stack()[0][3] + "()"
+    # request_title : str = f"All matches in specific season"
+    # response_body : str = f"List of all matches of Serie A league in season {season}."
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    matches = "matches"
+
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "footballstats/matches.html", {
+        "matches" : matches
+    })

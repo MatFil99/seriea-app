@@ -5,14 +5,14 @@ urlpatterns = [
     # /teams/
     path("teams/", views.teams, name="teams"),
     path("teams/<str:team>", views.team, name="team-base"),
-    path("teams/<str:team>/players", views.team_players),
-    path("teams/<str:team>/matches", views.team_matches),
+    path("teams/<str:team>/players", views.team_players, name="team-players"),
+    path("teams/<str:team>/matches", views.team_matches, name="team-matches"),
 
     # players
-    path("players/", views.players),
-    path("players/<str:player>", views.player),
+    path("players/", views.players, name="players"),
+    path("players/<str:player>", views.player, name="player"),
     
     # matches
-    path("matches/", views.matches),
-    path("matches/str:season", views.matches_of_season)
+    path("matches/", views.matches, name="matches"),
+    path("matches/str:season", views.matches_of_season, name="season-matches")
 ]

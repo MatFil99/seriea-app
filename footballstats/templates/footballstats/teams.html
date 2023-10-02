@@ -9,12 +9,28 @@
 Teams
 {% endblock page_title %}
 
+
 {% block content %}
 {% include "footballstats/includes/header.html" %}
 <h1>Team list</h1>
-<ul>
-{% for team in teams %}
-    <li><a href="{% url "team-base" team %}">{{ team | title }}</a></li>
-{% endfor %}
-</ul>
+
+<div class="content">
+    <table class="teams-tab">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Website</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+                <tr>
+                    <td>{{ team }}</td>
+                    <td><a href="{% url "team-base" team %}">Website</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock content %}
