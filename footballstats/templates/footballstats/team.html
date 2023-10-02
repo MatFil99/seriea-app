@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Club - {{ team }}
+{% endblock page_title %}
+
+{% block content %}
+{% include "footballstats/includes/header.html" %}
+<h1>Club details</h1>
+<p>{{ team }}</p>
+{% endblock content %}
