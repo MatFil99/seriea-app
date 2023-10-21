@@ -1,0 +1,87 @@
+.content-tab thead{
+    background-color: #bebebede;
+    font-weight: bold;
+}
+
+.content-tab {
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 1.5rem;
+}
+
+.content-tab tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.content-tab tr:hover {
+    background-color: #ddd;
+}
+
+.content-tab tr{
+    text-align: center;
+}
+
+/* width of columns in teams table */
+.teams-tab colgroup col:nth-child(1){
+    width: 100%;
+}
+
+/* width of columns in team table */
+.team-tab colgroup col:nth-child(1){
+    width: 20%;
+}
+.team-tab colgroup col:nth-child(2){
+    width: 80%;
+}
+
+/* width of columns in matches table */
+.matches-tab colgroup col:nth-child(1){
+    width: 10%;
+}
+.matches-tab colgroup col:nth-child(2){
+    width: 30%;
+}
+.matches-tab colgroup col:nth-child(3){
+    width: 30%;
+}
+.matches-tab colgroup col:nth-child(4){
+    width: 10%;
+}
+.matches-tab colgroup col:nth-child(5){
+    width: 20%;
+}
+
+.players-tab colgroup col:nth-child(1){
+    width: 30%;
+}
+.players-tab colgroup col:nth-child(2){
+    width: 30%;
+}
+.players-tab colgroup col:nth-child(3){
+    width: 20%;
+}
+.players-tab colgroup col:nth-child(4){
+    width: 20%;
+}
+
+.tabdiv-head {
+    background-color: rgb(223, 223, 163);
+}
+
+.tabdiv-head form {
+    background-color: beige;
+    font-size: 1.5rem;
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.tabdiv-head select {
+    margin-right: 1.5rem;
+    border: None;
+    font-size: 1.5rem;
+}
+
+.tabdiv-head input {
+    margin-right: 1.5rem;
+    /* border-radius: 0; */
+    font-size: 1.5rem;
+}

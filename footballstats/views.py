@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
 
 
-from .models import Club
+from .models import *
 
 # Create your views here.
 
@@ -24,37 +24,23 @@ def temporary_response_generator(method_name : str, request_title : str, respons
 def teams(request):
     all_clubs = Club.objects.all()
 
-    # method_name : str = inspect.stack()[0][3] + "()"
-    # request_title : str = "List of all teams"
-    # response_body : str = f"""There will be list of all teams. It will be possible to redirect to specific team page.
-    # <br>{all_clubs_str}"""
-    
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
-
     return render(request, "footballstats/teams.html", {
         "teams" : all_clubs #.capitalize()
     })
 
-
-
-def team(request, team : str):
+def team_by_id(request, team_id : int):
+    # redirects to teams/CLUB_NAME
     try:
-
-        selected_clubs = Club.objects.filter(club_name=str.upper(team))
-
-        # if not selected_clubs:
-        #     return HttpResponseNotFound(f"Club {team} not found")
-
+        selected_clubs = Club.objects.filter(club_id=team_id)
         club = selected_clubs[0] # get first club 
+        return redirect("team-base", club.club_name)
+    except:
+        raise Http404()
 
-        # method_name : str = inspect.stack()[0][3] + "()"
-        # request_title : str = f"Club general information - {team}"
-        # response_body : str = "There will be general information about specific club. Clients can show matches, players of that team."
-
-        # temp_response = temporary_response_generator(method_name, request_title, response_body)
-        # return HttpResponse(temp_response)
-
+def team_by_name(request, team : str):
+    try:
+        selected_clubs = Club.objects.filter(club_name=str.upper(team))
+        club = selected_clubs[0] # get first club 
         return render(request, "footballstats/team.html", {
             "team" : club,
         })
@@ -62,14 +48,7 @@ def team(request, team : str):
         raise Http404()
 
 def team_players(request, team : str):
-    method_name : str = inspect.stack()[0][3] + "()"
-    request_title : str = f"Players of club - {team}"
-    response_body : str = "View that will show players that are playing in certain club. Same basic information about them."
-
-    players = "players"
-
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
+    players = Player.objects.all()
 
     return render(request, "footballstats/players.html", {
         "players" : players
@@ -77,14 +56,7 @@ def team_players(request, team : str):
 
 
 def team_matches(request, team : str):
-    method_name : str = inspect.stack()[0][3] + "()"
-    request_title : str = f"Matches of club - {team}"
-    response_body : str = "This site will list matches of specific club."
-
-    matches = "matches"
-
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
+    matches = Match.objects.all()
 
     return render(request, "footballstats/matches.html", {
         "matches" : matches
@@ -92,57 +64,59 @@ def team_matches(request, team : str):
 
 
 def players(request):
-    method_name : str = inspect.stack()[0][3] + "()"
-    request_title : str = f"All players"
-    response_body : str = "List of all players that was playing in Serie A league."
-
-    players = "players"
-
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
+    players = Player.objects.all()
 
     return render(request, "footballstats/players.html", {
         "players" : players
     })
 
-def player(request, player):
-    method_name : str = inspect.stack()[0][3] + "()"
-    request_title : str = f"Player"
-    response_body : str = "Information about player"
-
-    player = "player"
-
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
+def player(request, player_id):
+    player = Player.objects.filter(player_id=player_id)
 
     return render(request, "footballstats/player.html", {
         "player" : player
     })
 
 def matches(request):
+    if request.method == "GET":
+        season = "2023/24"
+        matchday = 1
+    else:
+        data = request.POST
+        season = data.get("season")
+        matchday = data.get("matchday")
+        print(f"season = {season}, matchday = {matchday}")
+
+
     method_name : str = inspect.stack()[0][3] + "()"
     request_title : str = f"All matches in current season"
     response_body : str = "List of all matches of current season."
 
-    matches = "matches"
+    matches = Match.objects.all()
+    seasons = SeasonPart.objects.filter(season_part=1)
 
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
+    for s in seasons:
+        print(f"season_id = {s.season_part_id}")
+
+    matchdays = set([match.matchday for match in matches])
+
+    return render(request, "footballstats/matches.html", {
+        "matches" : matches,
+        "seasons": seasons,
+        "matchdays": matchdays,
+    })
+
+def matches_of_season(request, season : str):
+
+    matches = Match.objects.filter()
 
     return render(request, "footballstats/matches.html", {
         "matches" : matches
     })
 
-def matches_of_season(request, season : str):
-    # method_name : str = inspect.stack()[0][3] + "()"
-    # request_title : str = f"All matches in specific season"
-    # response_body : str = f"List of all matches of Serie A league in season {season}."
+def statistics(request):
+    statistics = "statistics"
 
-    matches = "matches"
-
-    # temp_response = temporary_response_generator(method_name, request_title, response_body)
-    # return HttpResponse(temp_response)
-
-    return render(request, "footballstats/matches.html", {
-        "matches" : matches
+    return render(request, "footballstats/statistics.html", {
+        "statistics": statistics
     })

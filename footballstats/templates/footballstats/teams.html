@@ -3,6 +3,7 @@
 
 {% block css_files %}
     <link rel="stylesheet" href="{% static "footballstats/footballstats.css" %}">
+    <link rel="stylesheet" href="{% static "footballstats/teams.css" %}">
 {% endblock css_files %}
 
 {% block page_title %}
@@ -13,24 +14,42 @@ Teams
 {% block content %}
 {% include "footballstats/includes/header.html" %}
 <h1>Team list</h1>
+<h2></h2>
+
 
 <div class="content">
-    <table class="teams-tab">
-        <thead>
-            <tr>
-                <td>Name</td>
-                <td>Website</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for team in teams %}
+    <div class="tabdiv-head">
+        <form action="">
+            <label for="season">Season:</label>
+            <select name="season" id="season">
+                {% for season in seasons  %}
+                <option value="{{ season.season_id }}">{{ season }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="tabdiv-body">
+        <table class="content-tab teams-tab">
+            <colgroup>
+                <col>
+            </colgroup>
+            <thead>
                 <tr>
-                    <td>{{ team }}</td>
-                    <td><a href="{% url "team-base" team %}">Website</a></td>
+                    <th>Name</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for team in teams %}
+                    <tr>
+                        <td><a href="{% url "team-base" team.club_id %}">{{ team }}</a></td>
+                        {% comment %} <td><a href="{% url "team-base" team %}">Website</a></td> {% endcomment %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
 </div>
 
 {% endblock content %}

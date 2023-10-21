@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static "footballstats/footballstats.css" %}">
 {% endblock css_files %}
 
 {% block page_title %}
@@ -12,5 +12,44 @@ Players
 {% block content %}
 {% include "footballstats/includes/header.html" %}
 <h1>Players</h1>
+
+<div class="content">
+    <div class="tabdiv-head">
+        <form action="">
+            <label for="season">Season:</label>
+            <select name="season" id="season">
+                {% for season in seasons  %}
+                <option value="{{ season.season_id }}">{{ season }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="tabdiv-body">
+        <table class="content-tab players-tab">
+            <colgroup>
+                <col><col><col><col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Surname</th>
+                    <th>Nationality</th>
+                    <th>Date of birth</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td>{{ player.firstname }}</td>
+                        <td>{{ player.surname }}</td>
+                        <td>{{ player.nationality }}</td>
+                        <td>{{ player.date_of_birth }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock content %}

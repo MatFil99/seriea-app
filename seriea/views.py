@@ -24,8 +24,10 @@ def home(request):
     request_title : str = f"Seriea home page"
     response_body : str = ""
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "home.html", {})
 
 
 def about(request):
@@ -33,5 +35,7 @@ def about(request):
     request_title : str = f"Seriea about page"
     response_body : str = ""
 
-    temp_response = temporary_response_generator(method_name, request_title, response_body)
-    return HttpResponse(temp_response)
+    # temp_response = temporary_response_generator(method_name, request_title, response_body)
+    # return HttpResponse(temp_response)
+
+    return render(request, "about.html", {})

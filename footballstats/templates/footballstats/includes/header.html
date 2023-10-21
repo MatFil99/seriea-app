@@ -7,7 +7,7 @@
 <div class="navbar">
 <header>
     <nav>
-        <a href="{% url "teams" %}">Home</a>
+        <a href="{% url "home" %}">Home</a>
     </nav>
     <nav>
         <a href="{% url "teams" %}">Teams</a>
@@ -19,10 +19,10 @@
         <a href="{% url "matches" %}">Matches</a>
     </nav>
     <nav>
-        <a href="">Statistics</a>
+        <a href="{% url "statistics" %}">Statistics</a>
     </nav>
     <nav>
-        <a href="">About</a>
+        <a href="{% url "about" %}">About</a>
     </nav>
 </header>
 </div>
