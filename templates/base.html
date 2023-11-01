@@ -11,7 +11,13 @@
     {% endblock css_files %}
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    {% block navigation %}
+    {% endblock navigation %}
+
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
 </body>
 </html>

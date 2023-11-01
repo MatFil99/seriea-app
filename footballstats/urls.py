@@ -15,7 +15,7 @@ urlpatterns = [
     
     # matches
     path("matches/", views.matches, name="matches"),
-    path("matches/str:season", views.matches_of_season, name="season-matches"),
+    # path("matches/str:season", views.matches_of_season, name="season-matches"),
 
     # statistics
     path("statistics/", views.statistics, name="statistics"),

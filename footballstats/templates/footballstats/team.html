@@ -9,45 +9,47 @@
 Club - {{ team }}
 {% endblock page_title %}
 
-{% block content %}
+{% block navigation %}
 {% include "footballstats/includes/header.html" %}
+{% endblock navigation %}
+
+{% block content %}
 <h1>Club details</h1>
 
-<div class="content">
-    <table class="content-tab team-tab">
-        <colgroup>
-            <col>
-            <col>
-        </colgroup>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>{{ team.club_name }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Headquarter</td>
-                <td>{{ team.headquarter|title }}</td>
-                {% comment %} <td><a href="{% url "team-base" team %}">Website</a></td> {% endcomment %}
-            </tr>
-            <tr>
-                <td>President</td>
-                <td>{{ team.president|title }}</td>
-            </tr>
-            <tr>
-                <td>Coach</td>
-                <td>{{ team.coach|title }}</td>
-            </tr>
-            <tr>
-                <td>Assistant Coach</td>
-                <td>{{ team.assistant_coach|title }}</td>
-            </tr>
-            <tr>
-                <td>Stadium</td>
-                <td>{{ team.stadium|title }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<table class="content-tab team-tab">
+    <colgroup>
+        <col>
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>{{ team.club_name }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Headquarter</td>
+            <td>{{ team.headquarter|title }}</td>
+            {% comment %} <td><a href="{% url "team-base" team %}">Website</a></td> {% endcomment %}
+        </tr>
+        <tr>
+            <td>President</td>
+            <td>{{ team.president|title }}</td>
+        </tr>
+        <tr>
+            <td>Coach</td>
+            <td>{{ team.coach|title }}</td>
+        </tr>
+        <tr>
+            <td>Assistant Coach</td>
+            <td>{{ team.assistant_coach|title }}</td>
+        </tr>
+        <tr>
+            <td>Stadium</td>
+            <td>{{ team.stadium|title }}</td>
+        </tr>
+    </tbody>
+</table>
+
 {% endblock content %}

@@ -3,53 +3,53 @@
 
 {% block css_files %}
     <link rel="stylesheet" href="{% static "footballstats/footballstats.css" %}">
-    <link rel="stylesheet" href="{% static "footballstats/teams.css" %}">
 {% endblock css_files %}
 
 {% block page_title %}
 Teams
 {% endblock page_title %}
 
+{% block navigation %}
+{% include "footballstats/includes/header.html" %}
+{% endblock navigation %}
 
 {% block content %}
-{% include "footballstats/includes/header.html" %}
+
 <h1>Team list</h1>
-<h2></h2>
-
-
-<div class="content">
-    <div class="tabdiv-head">
-        <form action="">
-            <label for="season">Season:</label>
-            <select name="season" id="season">
-                {% for season in seasons  %}
-                <option value="{{ season.season_id }}">{{ season }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-    <div class="tabdiv-body">
-        <table class="content-tab teams-tab">
-            <colgroup>
-                <col>
-            </colgroup>
-            <thead>
+<div class="tabdiv-head">
+    <form action="{% url "teams" %}" method="POST">
+        {% csrf_token %}
+        <label for="season">Season:</label>
+        <select name="season" id="season" onchange="this.form.submit()">
+            {% for s in seasons  %}
+            <option value="{{ s.season_id }}" {% if s.season_id == season %} selected="selected" {% endif %}>
+                {{ s }}
+            </option>
+            {% endfor %}
+        </select>
+        {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+    </form>
+</div>
+<div class="tabdiv-body">
+    <table class="content-tab teams-tab">
+        <colgroup>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
                 <tr>
-                    <th>Name</th>
+                    <td><a href="{% url "team-base" team.club_id %}">{{ team }}</a></td>
+                    {% comment %} <td><a href="{% url "team-base" team %}">Website</a></td> {% endcomment %}
                 </tr>
-            </thead>
-            <tbody>
-                {% for team in teams %}
-                    <tr>
-                        <td><a href="{% url "team-base" team.club_id %}">{{ team }}</a></td>
-                        {% comment %} <td><a href="{% url "team-base" team %}">Website</a></td> {% endcomment %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 
 {% endblock content %}

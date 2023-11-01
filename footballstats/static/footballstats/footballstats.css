@@ -64,12 +64,12 @@
     width: 20%;
 }
 
-.tabdiv-head {
-    background-color: rgb(223, 223, 163);
-}
+/* .tabdiv-head {
+    background-color: rgb(70, 70, 0);
+} */
 
 .tabdiv-head form {
-    background-color: beige;
+    background-color: rgb(161, 161, 161);
     font-size: 1.5rem;
     padding: 0.5rem 0 0.5rem 1rem;
 }
@@ -84,4 +84,16 @@
     margin-right: 1.5rem;
     /* border-radius: 0; */
     font-size: 1.5rem;
+}
+
+#team {
+    width: 8rem;
+}
+
+#season {
+    width: 7.5rem;
+}
+
+#matchday {
+    width: 3rem;
 }

@@ -51,9 +51,9 @@ class Season(models.Model):
 
 class PlayerClubOfSeason(models.Model):
     """description"""
-    player = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
-    club = models.ForeignKey(Club, null=True, on_delete=models.SET_NULL)
-    season = models.ForeignKey(Season, null=True, on_delete=models.SET_NULL)
+    player = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL, related_name="seasonteam_set")
+    club = models.ForeignKey(Club, null=True, on_delete=models.SET_NULL, related_name="seasonteam_set")
+    season = models.ForeignKey(Season, null=True, on_delete=models.SET_NULL, related_name="seasonteam_set")
 
 
 
